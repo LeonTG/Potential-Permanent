@@ -1,0 +1,9 @@
+name: PotentailPermanent
+main: com.leontg77.potentialpermanent.Main
+version: 1.0
+author: LeonTG77
+description: Plugin for the UHC scenario called potentialpermanent
+
+commands:
+  pp:
+    description: Enable or disable the scenario
