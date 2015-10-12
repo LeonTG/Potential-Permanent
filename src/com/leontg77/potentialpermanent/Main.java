@@ -18,7 +18,7 @@ public class Main extends JavaPlugin {
 	private Logger logger = getLogger();
 	public static Main plugin;
 	
-	public static boolean enabled = false;
+	public static final String PREFIX = "§e§lPP §8» §7";
 	
 	@Override
 	public void onDisable() {
@@ -35,14 +35,5 @@ public class Main extends JavaPlugin {
 		
 		getCommand("pp").setExecutor(new PPCommand());
 		Utils.ensureNms();
-	}
-	
-	/**
-	 * Get the PP prefix.
-	 * 
-	 * @return The PP prefix.
-	 */
-	public static String prefix() {
-		return "§e§lPP §8» §7";
 	}
 }
