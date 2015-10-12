@@ -19,6 +19,7 @@ import com.leontg77.potentialpermanent.listeners.EatingListener;
  * @author LeonTG77
  */
 public class PPCommand implements CommandExecutor {
+	private boolean enabled = false;
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -28,30 +29,35 @@ public class PPCommand implements CommandExecutor {
 		}
 		
 		if (args.length == 0) {
-			sender.sendMessage(Main.prefix() + "Usage: /pp <enable|disable>");
+			sender.sendMessage(Main.PREFIX + "Usage: /pp <enable|disable>");
 			return true;
 		}
 		
+		String enable = Main.PREFIX + "PotentialPermanent has been enabled.";
+		String disable = Main.PREFIX + "PotentialPermanent has been disabled.";
+		
 		switch (args[0]) {
 		case "enable":
-			if (Main.enabled) {
-				sender.sendMessage(Main.prefix() + "PotentialPermanent is already enabled.");
+			if (enabled) {
+				sender.sendMessage(Main.PREFIX + "PotentialPermanent is already enabled.");
 				return true;
 			}
 			
+			PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION, Short.MAX_VALUE, 4);
+			
 			for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-				online.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1726272000, 4));
+				online.addPotionEffect(effect);
 				online.setMaxHealth(20.0);
 				
-				online.sendMessage(Main.prefix() + "PotentialPermanent has been enabled.");
+				online.sendMessage(enable);
 			}
 			
 			Bukkit.getPluginManager().registerEvents(new EatingListener(), Main.plugin);
-			Main.enabled = true;
+			enabled = true;
 			break;
 		case "disable":
-			if (!Main.enabled) {
-				sender.sendMessage(Main.prefix() + "PotentialPermanent is not enabled.");
+			if (!enabled) {
+				sender.sendMessage(Main.PREFIX + "PotentialPermanent is not enabled.");
 				return true;
 			}
 			
@@ -59,14 +65,14 @@ public class PPCommand implements CommandExecutor {
 				online.removePotionEffect(PotionEffectType.ABSORPTION);
 				online.setMaxHealth(20.0);
 				
-				online.sendMessage(Main.prefix() + "PotentialPermanent has been disabled.");
+				online.sendMessage(disable);
 			}
 			
 			HandlerList.unregisterAll(Main.plugin);
-			Main.enabled = false;
+			enabled = false;
 			break;
 		default: 
-			sender.sendMessage(Main.prefix() + "Usage: /pp <enable|disable>");
+			sender.sendMessage(Main.PREFIX + "Usage: /pp <enable|disable>");
 		}
 		return true;
 	}
