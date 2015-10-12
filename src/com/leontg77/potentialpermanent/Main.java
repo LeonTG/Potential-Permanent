@@ -18,7 +18,7 @@ public class Main extends JavaPlugin {
 	private Logger logger = getLogger();
 	public static Main plugin;
 	
-	public static final String PREFIX = "§e§lPP §8» §7";
+	public static final String PREFIX = "§9§lPP §8» §7";
 	
 	@Override
 	public void onDisable() {
