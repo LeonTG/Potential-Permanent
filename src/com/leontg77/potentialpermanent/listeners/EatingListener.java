@@ -49,8 +49,9 @@ public class EatingListener implements Listener {
         player.setSaturation(player.getSaturation() + SATURATION_TO_ADD);
         player.setFoodLevel(player.getFoodLevel() + FOOD_TO_ADD);
 		event.setCancelled(true);
-        
-		player.getInventory().removeItem(new ItemStack (Material.GOLDEN_APPLE, 1));
+		
+		item.setAmount(1);
+		player.getInventory().removeItem(item);
 		
 		if (absHearts != 0) {
 			float toTake = Math.min(4, absHearts);
