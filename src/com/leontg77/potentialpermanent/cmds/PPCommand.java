@@ -36,8 +36,7 @@ public class PPCommand implements CommandExecutor {
 		String enable = Main.PREFIX + "PotentialPermanent has been enabled.";
 		String disable = Main.PREFIX + "PotentialPermanent has been disabled.";
 		
-		switch (args[0]) {
-		case "enable":
+		if (args[0].equalsIgnoreCase("enable")) {
 			if (enabled) {
 				sender.sendMessage(Main.PREFIX + "PotentialPermanent is already enabled.");
 				return true;
@@ -54,8 +53,7 @@ public class PPCommand implements CommandExecutor {
 			
 			Bukkit.getPluginManager().registerEvents(new EatingListener(), Main.plugin);
 			enabled = true;
-			break;
-		case "disable":
+		} else if (args[0].equalsIgnoreCase("disable")) {
 			if (!enabled) {
 				sender.sendMessage(Main.PREFIX + "PotentialPermanent is not enabled.");
 				return true;
@@ -70,8 +68,7 @@ public class PPCommand implements CommandExecutor {
 			
 			HandlerList.unregisterAll(Main.plugin);
 			enabled = false;
-			break;
-		default: 
+		} else {
 			sender.sendMessage(Main.PREFIX + "Usage: /pp <enable|disable>");
 		}
 		return true;
